@@ -11,8 +11,12 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+    // php artisan db:seed
+    // ATAU
+    // php artisan migrate:fresh --seed
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        \App\Models\UsersDetail::factory(10)->create();
     }
 }
