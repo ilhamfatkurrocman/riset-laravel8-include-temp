@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 //     return "Data berhasil disimpan";
 // });
 
+Route::view('/', 'dashboard');
+
 // http://127.0.0.1:8000/crud
 Route::get('crud', function () {
     //database
