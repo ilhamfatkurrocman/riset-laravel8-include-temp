@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// http://127.0.0.1:8000/user
+Route::get('/user/{id?}/{akti?}', function ($id = 1, $aktif = "YA") {
+    // return view('welcome');
+    return "<h1>Tests Route $id $aktif</h1>";
+})->where('id','[a-z]*');
+
+// http://127.0.0.1:8000
+Route::view('/', 'welcome');
+
+Route::put('simpan', function () {
+    return "Data berhasil disimpan";
+});
+
+// http://127.0.0.1:8000/crud
+Route::get('crud', function () {
+    //database
+    return view('crud', ['nama' => 'ilham']);
 });
