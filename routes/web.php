@@ -28,9 +28,6 @@ use Illuminate\Support\Facades\Route;
 //     return "Data berhasil disimpan";
 // });
 
-Route::view('/dashboard', 'dashboard');
-Route::view('/', 'pages.auth.login');
-
 // // http://127.0.0.1:8000/crud
 // Route::get('crud', function () {
 //     //database
@@ -47,6 +44,20 @@ Route::view('/', 'pages.auth.login');
 //     Route::get('/data-kerja', [CrudController::class, 'edit'])->name('data-kerja');
 // });
 
+// Route::view('/dashboard', 'dashboard');
+// Route::view('/', 'pages.auth.login');
+
+
 Auth::routes();
+
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
+
+Route::post('/', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::post('/', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('/member', [App\Http\Controllers\MemberController::class, 'index']);
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
