@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CrudController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,22 +28,25 @@ use Illuminate\Support\Facades\Route;
 //     return "Data berhasil disimpan";
 // });
 
-Route::view('/', 'dashboard');
+Route::view('/dashboard', 'dashboard');
+Route::view('/', 'pages.auth.login');
 
-// http://127.0.0.1:8000/crud
-Route::get('crud', function () {
-    //database
-    return view('crud', ['nama' => 'ilham']);
-});
-
-// Route::prefix('master-data')->group(function() {
-//     Route::get('/data-karyawan', [CrudController::class, 'index'])->name('dashboard');
-//     Route::get('/data-kerja', [CrudController::class, 'edit'])->name('dashboard');
+// // http://127.0.0.1:8000/crud
+// Route::get('crud', function () {
+//     //database
+//     return view('crud', ['nama' => 'ilham']);
 // });
 
-Route::name('master-data.')->prefix('master-data')->group(function () {
-    Route::get('/data-karyawan', [CrudController::class, 'index'])->name('data-karyawan');
-    Route::get('/data-kerja', [CrudController::class, 'edit'])->name('data-kerja');
-});
+// // Route::prefix('master-data')->group(function() {
+// //     Route::get('/data-karyawan', [CrudController::class, 'index'])->name('dashboard');
+// //     Route::get('/data-kerja', [CrudController::class, 'edit'])->name('dashboard');
+// // });
 
+// Route::name('master-data.')->prefix('master-data')->group(function () {
+//     Route::get('/data-karyawan', [CrudController::class, 'index'])->name('data-karyawan');
+//     Route::get('/data-kerja', [CrudController::class, 'edit'])->name('data-kerja');
+// });
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
